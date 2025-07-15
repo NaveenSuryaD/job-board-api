@@ -1,33 +1,19 @@
-# Ignore build output and user-specific files
+# Build artifacts
 bin/
 obj/
-*.user
-*.suo
-*.userosscache
-*.sln.docstates
-
-# Visual Studio Code
-.vscode/
-
-# OS generated files
-.DS_Store
-Thumbs.db
-
-# Logs
-*.log
-
-# EF Core Migrations
-Migrations/
-
-# Sensitive files
-appsettings.Development.json
-appsettings.Local.json
-.env
-
-# Ignore all DLLs and PDBs
 *.dll
 *.pdb
-
-# Ignore all files in Debug and Release folders
 **/Debug/
 **/Release/
+
+# VS Code
+.vscode/
+
+# User-specific files
+*.user
+*.suo
+
+# OS and logs
+.DS_Store
+*.log
+Thumbs.db
