@@ -1,0 +1,116 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>JobBoardApi</name>
+    </assembly>
+    <members>
+        <member name="M:JobBoardApi.Controllers.ApplicationsController.ApplyToJob(System.Int32,JobBoardApi.Models.ApplicationRequest)">
+            <summary>
+            Apply to a job with resume file
+            </summary>
+            <param name="jobId">ID of the job post</param>
+            <param name="application">Application details</param>
+            <returns>Created application</returns>
+            <response code="201">If the application is created successfully</response>
+            <response code="400">If the application is null or invalid</response>
+        </member>
+        <member name="M:JobBoardApi.Controllers.ApplicationsController.GetApplicationsForJob(System.Int32)">
+            <summary>
+            Get all applications for a job post
+            </summary>
+            <param name="jobId">ID of the job post</param>
+            <returns>List of applications for the specified job post</returns>
+            <response code="200">Returns the list of applications</response>
+            <response code="404">If the job post with the specified ID does not exist</response>
+        </member>
+        <member name="M:JobBoardApi.Controllers.JobsController.GetAllJobs">
+            <summary>
+            Get all job posts
+            </summary>
+            <returns>List of job posts</returns>
+            <response code="200">Returns the list of job posts</response>
+        </member>
+        <member name="M:JobBoardApi.Controllers.JobsController.GetJobById(System.Int32)">
+            <summary>
+            Get a job post by ID
+            </summary>
+            <param name="id">ID of the job post</param>
+            <returns>Job post with the specified ID</returns>
+            <response code="200">Returns the job post</response>
+            <response code="404">If the job post with the specified ID does not exist</response>
+        </member>
+        <member name="M:JobBoardApi.Controllers.JobsController.CreateJob(JobBoardApi.Models.Jobpost)">
+            <summary>
+            Create a new job post
+            </summary>
+            <param name="job">Job post to create</param>
+            <returns>Created job post</returns>
+            <response code="201">Returns the created job post</response>
+            <response code="400">If the job post is null or invalid</response>
+        </member>
+        <member name="M:JobBoardApi.Controllers.JobsController.UpdateJob(System.Int32,JobBoardApi.Models.Jobpost)">
+            <summary>
+            Update an existing job post
+            </summary>
+            <param name="id">ID of the job post to update</param>
+            <param name="updatedJob">Updated job post data</param>
+            <returns>No content if successful</returns>
+            <response code="204">If the update is successful</response>
+            <response code="400">If the job post is null or invalid</response>
+            <response code="404">If the job post with the specified ID does not exist</response>
+        </member>
+        <member name="M:JobBoardApi.Controllers.JobsController.DeleteJob(System.Int32)">
+            <summary>
+            Delete a job post
+            </summary>
+            <param name="id">ID of the job post to delete</param>
+            <returns>No content if successful</returns>
+            <response code="204">If the deletion is successful</response>
+            <response code="404">If the job post with the specified ID does not exist</response>
+        </member>
+        <member name="M:JobBoardApi.Controllers.JobsController.GetRecentJobs">
+            <summary>
+            Get the 5 most recent job posts
+            </summary>
+            <returns>List of the 5 most recent job posts</returns>
+            <response code="200">Returns the list of the 5 most recent job posts</response>
+            <response code="500">If there is an error retrieving the job posts</response>
+        </member>
+        <member name="T:JobBoardApi.Migrations.InitialCreate">
+            <inheritdoc />
+        </member>
+        <member name="M:JobBoardApi.Migrations.InitialCreate.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:JobBoardApi.Migrations.InitialCreate.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:JobBoardApi.Migrations.InitialCreate.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:JobBoardApi.Migrations.AddApplicationService">
+            <inheritdoc />
+        </member>
+        <member name="M:JobBoardApi.Migrations.AddApplicationService.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:JobBoardApi.Migrations.AddApplicationService.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:JobBoardApi.Migrations.AddApplicationService.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:JobBoardApi.Migrations.AutoMigration_20250714">
+            <inheritdoc />
+        </member>
+        <member name="M:JobBoardApi.Migrations.AutoMigration_20250714.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:JobBoardApi.Migrations.AutoMigration_20250714.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:JobBoardApi.Migrations.AutoMigration_20250714.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>

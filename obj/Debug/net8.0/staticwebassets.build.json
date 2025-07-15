@@ -1,0 +1,19 @@
+{
+  "Version": 1,
+  "Hash": "0YBOvCA3UT15ATuuxSWINyaqG2dd2Gqd9BKDppJ9KUA=",
+  "Source": "JobBoardApi",
+  "BasePath": "_content/JobBoardApi",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "JobBoardApi/wwwroot",
+      "Source": "JobBoardApi",
+      "ContentRoot": "/Users/naveensuryadevara/Desktop/Backend /JobBoardApi/wwwroot/",
+      "BasePath": "_content/JobBoardApi",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": []
+}
