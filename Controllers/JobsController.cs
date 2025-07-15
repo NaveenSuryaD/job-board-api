@@ -1,6 +1,8 @@
 using JobBoardApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using JobBoardApi.Services;
+using JobBoardApi.Dtos;
+using AutoMapper;
 
 namespace JobBoardApi.Controllers
 {
@@ -9,10 +11,12 @@ namespace JobBoardApi.Controllers
     public class JobsController : ControllerBase
     {
         private readonly IJobPostService _service;
+        private readonly IMapper _mapper;
 
-        public JobsController(IJobPostService service)
+        public JobsController(IJobPostService service, IMapper mapper)
         {
             _service = service;
+            _mapper = mapper;
         }
 
         // Get all job posts ---- api/jobs
@@ -25,7 +29,7 @@ namespace JobBoardApi.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Jobpost>>> GetAllJobs()
+        public async Task<ActionResult<IEnumerable<JobPostResponseDto>>> GetAllJobs()
         {
             return await _service.GetAllJobsAsync().ContinueWith(task =>
             {
@@ -33,7 +37,8 @@ namespace JobBoardApi.Controllers
                 {
                     return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving job posts.");
                 }
-                return Ok(task.Result);
+                var jobDtos = _mapper.Map<List<JobPostResponseDto>>(task.Result);
+                return Ok(jobDtos);
             });
         }
 
@@ -49,7 +54,7 @@ namespace JobBoardApi.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpGet("{id}")]
-        public async Task<ActionResult<Jobpost>> GetJobById(int id)
+        public async Task<ActionResult<JobPostResponseDto>> GetJobById(int id)
         {
             try
             {
@@ -58,7 +63,8 @@ namespace JobBoardApi.Controllers
                 {
                     return NotFound();
                 }
-                return Ok(job);
+                var jobDto = _mapper.Map<JobPostResponseDto>(job);
+                return Ok(jobDto);
             }
             catch (Exception)
             {
@@ -78,8 +84,9 @@ namespace JobBoardApi.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpPost]
-        public async Task<ActionResult<Jobpost>> CreateJob(Jobpost job)
+        public async Task<ActionResult<Jobpost>> CreateJob(JobPostDto jobDto)
         {
+            var job = _mapper.Map<Jobpost>(jobDto);
             if (job == null)
             {
                 return BadRequest("Job post cannot be null.");
@@ -112,8 +119,9 @@ namespace JobBoardApi.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateJob(int id, Jobpost updatedJob)
+        public async Task<IActionResult> UpdateJob(int id, JobPostDto updatedJobDto)
         {
+            var updatedJob = _mapper.Map<Jobpost>(updatedJobDto);
             if (id != updatedJob.Id)
             {
                 return BadRequest("Job ID mismatch.");
@@ -162,12 +170,17 @@ namespace JobBoardApi.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpGet("recent")]
-        public async Task<ActionResult<IEnumerable<Jobpost>>> GetRecentJobs()
+        public async Task<ActionResult<IEnumerable<JobPostResponseDto>>> GetRecentJobs()
         {
             try
             {
                 var recentJobs = await _service.GetRecentJobsAsync();
-                return Ok(recentJobs);
+                if (recentJobs == null || !recentJobs.Any())
+                {
+                    return NotFound("No recent job posts found.");
+                }
+                var recentJobDtos = _mapper.Map<List<JobPostResponseDto>>(recentJobs);
+                return Ok(recentJobDtos);
             }
             catch (Exception ex)
             {
