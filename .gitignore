@@ -23,3 +23,11 @@ Migrations/
 appsettings.Development.json
 appsettings.Local.json
 .env
+
+# Ignore all DLLs and PDBs
+*.dll
+*.pdb
+
+# Ignore all files in Debug and Release folders
+**/Debug/
+**/Release/
